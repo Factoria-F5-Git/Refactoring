@@ -44,6 +44,7 @@ class Product {
     }
 }
 
+//encapsulate field
 class User {
 
     private String country;
