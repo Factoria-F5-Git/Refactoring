@@ -1,13 +1,18 @@
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class DealTest {
+    @Mock
+    Sender mockSender;
 
     Deal deal;
 
     @Test
-    public void sendShouldCallSender() {
+    public void sendShouldCallSenderWithTestSender() {
         TestSender testSender = new TestSender();
         assertEquals("Not sent!", testSender.message);
 
@@ -15,6 +20,14 @@ class DealTest {
 
         deal.sendDeal();
         assertEquals("I've been sent", testSender.message);
+    }
+
+    public void sendShouldCallSenderWithMockSender() {
+        mockSender = mock(Sender.class);
+        deal = new Deal(mockSender);
+        deal.sendDeal();
+
+        verify(mockSender).send();
     }
 
     @Test
@@ -40,6 +53,7 @@ class DealTest {
 
         assertEquals(98.0, deal.getTotal());
     }
+
 }
 
 class TestSender implements Sender{
