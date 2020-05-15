@@ -24,6 +24,15 @@ class Deal {
         }
     }
 
+    public double getTotal() {
+        return total;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public void setSpecialDeal(boolean isSpecialDeal) {
+        specialDeal = isSpecialDeal;
+    }
 }
 
 class DealSender implements Sender {

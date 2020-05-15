@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ class OrderTest {
 
     @Test
     public void calculateTotalShouldHave90PercentDiscountWhenUserIsFromCN() {
-
         //why are we using arraylist instead of list?
         productList = new ArrayList<Product>();
         productList.add(new Product(1.0, 3.15));
@@ -25,7 +25,7 @@ class OrderTest {
         //inside or outside the test? what is the difference with the Pizza Delivery class?
         order = new Order(productList, user);
 
-        assertEquals(order.calculateTotal(), 5.535);
+        assertEquals(5.535, order.calculateTotal());
     }
 
     //could we write another test with a different country?
