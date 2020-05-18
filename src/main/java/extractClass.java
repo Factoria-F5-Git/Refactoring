@@ -1,29 +1,34 @@
-class Soldier {
+class Player {
 
-    private static final int WEAPON_READY = 1;
-    private static final int WEAPON_BROKEN = 0;
+    public static final int IN_POSSESSION_OF_THE_BALL = 1;
+    public static final int NOT_IN_POSSESSION_OF_THE_BALL = 0;
 
-    public int health;
-    public int damage;
-    public int weaponStatus;
+    // Access level modifiers, all public?
+    public int totalPoints;
+    public int ballPossession;
+    public int shotLine;
 
-    public Soldier(int health, int damage, int weaponStatus) {
-        this.health = health;
-        this.damage = damage;
-        this.weaponStatus = weaponStatus;
+    public Player(int totalPoints, int shotLine, int ballPossession) {
+        this.totalPoints = totalPoints;
+        this.shotLine = shotLine;
+        this.ballPossession = ballPossession;
     }
 
-    public int getDamage() {
-        if (this.weaponStatus == WEAPON_READY) {
-            return damage;
-        } else {
-            return 0;
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void shoot() {
+        if (this.ballPossession == IN_POSSESSION_OF_THE_BALL) {
+            this.totalPoints += shotLine;
         }
     }
 
-    public void attack(Soldier soldier) {
-        if (this.weaponStatus == WEAPON_READY) {
-            soldier.health -= damage;
+    public void pass(Player otherPlayer) {
+        if (this.ballPossession == IN_POSSESSION_OF_THE_BALL) {
+            otherPlayer.totalPoints += shotLine;
         }
+        this.ballPossession = NOT_IN_POSSESSION_OF_THE_BALL;
+        otherPlayer.ballPossession = IN_POSSESSION_OF_THE_BALL;
     }
 }
