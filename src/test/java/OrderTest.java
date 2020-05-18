@@ -20,9 +20,10 @@ class OrderTest {
         productList.add(new Product(1.0, 3.15));
         productList.add(new Product(3.0, 1.0));
 
-        user = new User("CN");
+        user = new User();
+        user.country = "CN";
 
-        //inside or outside the test? what is the difference with the Pizza Delivery class?
+        //inside or outside the test? what is the difference with the PizzaDeliveryTest?
         order = new Order(productList, user);
 
         assertEquals(5.535, order.calculateTotal());

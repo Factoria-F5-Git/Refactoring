@@ -17,7 +17,7 @@ class Order {
         }
 
         // Apply regional discounts.
-        switch (user.getCountry()) {
+        switch (user.country) {
             case "US":
                 total *= 0.85;
                 break;
@@ -46,15 +46,5 @@ class Product {
 
 //encapsulate field
 class User {
-
-    private String country;
-
-    // what is the advantage of this getter?
-    public String getCountry(){
-        return country;
-    }
-
-    User(String country){
-        this.country = country;
-    }
+    public String country;
 }
