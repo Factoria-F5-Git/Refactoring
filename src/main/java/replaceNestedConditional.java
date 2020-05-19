@@ -1,27 +1,13 @@
 class Citizen {
 
-    private boolean isDead;
-    private boolean isRetired;
-    private boolean isSeparated;
-    private int seniority;
-    private int monthsDisabled;
-    private boolean isPartTime;
+    public boolean isDead;
+    public boolean isRetired;
+    public boolean isSeparated;
+    public int seniority;
+    public int monthsDisabled;
+    public boolean isPartTime;
 
-    Citizen(boolean isDead, boolean isRetired, boolean isSeparated) {
-
-        this.isDead = isDead;
-        this.isRetired = isRetired;
-        this.isSeparated = isSeparated;
-    }
-
-    // 2 different constructors
-    Citizen(int seniority, int monthsDisabled, boolean isPartTime) {
-        this.seniority = seniority;
-        this.monthsDisabled = monthsDisabled;
-        this.isPartTime = isPartTime;
-    }
-
-    // Replace Nested Conditional with Guard Clauses
+    // Refactoring 1: Replace Nested Conditional with Guard Clauses
     public double getPayAmount() {
         double result;
         if (isDead) {
@@ -40,24 +26,23 @@ class Citizen {
         return result;
     }
 
-    // do they need to be separate methods?
-    private double separatedAmount() {
+    public double separatedAmount() {
         return 7;
     }
 
-    private double normalPayAmount() {
+    public double normalPayAmount() {
         return 5;
     }
 
-    private double retiredAmount() {
+    public double retiredAmount() {
         return 3;
     }
 
-    private double deadAmount() {
+    public double deadAmount() {
         return 10;
     }
 
-    // Consolidate Conditional Expression
+    // Refactoring 2: Consolidate Conditional Expression
     double disabilityAmount() {
         if (seniority < 2) {
             return 0;
