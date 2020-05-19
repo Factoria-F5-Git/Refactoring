@@ -8,7 +8,7 @@ class BirdTest {
     public void getSpeedShouldReturn9ForEuropeanBird(){
         Bird bird = new Bird(Origin.EUROPEAN, 0, 0, true);
 
-        assertEquals(9.0, bird.getBaseSpeed());
+        assertEquals(9.0, bird.getSpeed());
     }
 
     //what other tests can we add?

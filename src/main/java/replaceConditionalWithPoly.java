@@ -1,11 +1,11 @@
 class Bird {
 
-    private Origin origin;
-    private double numberOfCoconuts;
-    private boolean isNailed;
-    private double voltage;
+    public Origin origin;
+    public double numberOfCoconuts;
+    public boolean isNailed;
+    public double voltage;
 
-    Bird(Origin origin, double numberOfCoconuts, double voltage, boolean isNailed){
+    Bird(Origin origin, double numberOfCoconuts, double voltage, boolean isNailed) {
         this.origin = origin;
         this.numberOfCoconuts = numberOfCoconuts;
         this.voltage = voltage;
@@ -15,25 +15,13 @@ class Bird {
     double getSpeed() {
         switch (origin) {
             case EUROPEAN:
-                return getBaseSpeed();
+                return 9.0;
             case AFRICAN:
-                return getBaseSpeed() - getLoadFactor() * numberOfCoconuts;
+                return 9.0 - 1.2 * numberOfCoconuts;
             case NORWEGIAN_BLUE:
-                return (isNailed) ? 0 : getBaseSpeed(voltage);
+                return (isNailed) ? 0 : (9.0 * voltage);
         }
         throw new RuntimeException("Should be unreachable");
-    }
-
-    double getBaseSpeed(){
-        return 9.0;
-    }
-
-    double getBaseSpeed(double voltage){
-        return 9.0*voltage;
-    }
-
-    double getLoadFactor(){
-        return 1.2;
     }
 }
 
@@ -42,27 +30,3 @@ enum Origin {
     AFRICAN,
     NORWEGIAN_BLUE
 }
-//
-//abstract class Bird {
-//    // ...
-//    abstract double getSpeed();
-//}
-
-//class European extends Bird {
-//    double getSpeed() {
-//        return getBaseSpeed();
-//    }
-//}
-//class African extends Bird {
-//    double getSpeed() {
-//        return getBaseSpeed() - getLoadFactor() * numberOfCoconuts;
-//    }
-//}
-//class NorwegianBlue extends Bird {
-//    double getSpeed() {
-//        return (isNailed) ? 0 : getBaseSpeed(voltage);
-//    }
-//}
-//
-//// Somewhere in client code
-//speed = bird.getSpeed();
