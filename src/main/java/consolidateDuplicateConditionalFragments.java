@@ -5,7 +5,6 @@ class Deal {
     public Sender sender;
     public boolean specialDeal;
 
-
     Deal(Sender sender) {
         this.sender = sender;
     }
