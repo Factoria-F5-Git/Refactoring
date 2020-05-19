@@ -1,9 +1,10 @@
 import java.util.List;
 
+// Refactoring 1. extract method
 class Order {
 
-    private List<Product> products;
-    private User user;
+    public List<Product> products;
+    public User user;
 
     Order(List<Product> products, User user){
         this.products = products;
@@ -16,7 +17,6 @@ class Order {
             total += product.quantity * product.price;
         }
 
-        // Apply regional discounts.
         switch (user.country) {
             case "US":
                 total *= 0.85;
@@ -34,17 +34,11 @@ class Order {
 }
 
 class Product {
-
-    Double quantity;
-    Double price;
-
-    Product(Double quantity, Double price){
-        this.quantity = quantity;
-        this.price = price;
-    }
+    public Double quantity;
+    public Double price;
 }
 
-//encapsulate field
+//Refactoring 2. encapsulate field
 class User {
     public String country;
 }

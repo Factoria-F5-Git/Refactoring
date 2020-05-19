@@ -7,18 +7,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderTest {
-    //private or public?
+
     private Order order;
     private User user;
-    //naming?
     private List<Product> productList;
 
     @Test
     public void calculateTotalShouldHave90PercentDiscountWhenUserIsFromCN() {
-        //why are we using arraylist instead of list?
         productList = new ArrayList<Product>();
-        productList.add(new Product(1.0, 3.15));
-        productList.add(new Product(3.0, 1.0));
+        Product product = new Product();
+        product.quantity = 1.0;
+        product.price = 3.15;
+        productList.add(product);
+        product = new Product();
+        product.quantity = 3.0;
+        product.price = 1.0;
+        productList.add(product);
 
         user = new User();
         user.country = "CN";
