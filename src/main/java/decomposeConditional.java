@@ -7,7 +7,7 @@ class Charge {
     public final int winterRate = 1;
     public final int summerRate = 2;
 
-    private int quantity;
+    public int quantity;
 
     Charge(int quantity){
         this.quantity = quantity;

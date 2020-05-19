@@ -34,24 +34,24 @@ class DealTest {
     public void sendShouldCalculateSpecialDeal() {
         TestSender testSender = new TestSender();
         deal = new Deal(testSender);
-        deal.setPrice(100);
-        deal.setSpecialDeal(true);
+        deal.price = 100;
+        deal.specialDeal = true;
 
         deal.sendDeal();
 
-        assertEquals(95.0, deal.getTotal());
+        assertEquals(95.0, deal.total);
     }
 
     @Test
     public void sendShouldCalculateNormalDeal() {
         TestSender testSender = new TestSender();
         deal = new Deal(testSender);
-        deal.setPrice(100);
-        deal.setSpecialDeal(false);
+        deal.price = 100;
+        deal.specialDeal = false;
 
         deal.sendDeal();
 
-        assertEquals(98.0, deal.getTotal());
+        assertEquals(98.0, deal.total);
     }
 
 }

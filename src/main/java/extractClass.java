@@ -3,7 +3,6 @@ class Player {
     public static final int IN_POSSESSION_OF_THE_BALL = 1;
     public static final int NOT_IN_POSSESSION_OF_THE_BALL = 0;
 
-    // Access level modifiers, all public?
     public int totalPoints;
     public int ballPossession;
     public int shotLine;
@@ -12,10 +11,6 @@ class Player {
         this.totalPoints = totalPoints;
         this.shotLine = shotLine;
         this.ballPossession = ballPossession;
-    }
-
-    public int getTotalPoints() {
-        return totalPoints;
     }
 
     public void shoot() {

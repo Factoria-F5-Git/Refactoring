@@ -14,16 +14,16 @@ class PlayerTest {
 
     @Test
     public void shouldHave2PointsIfPlayerHasTheBall() {
-        assertEquals(0, player.getTotalPoints());
+        assertEquals(0, player.totalPoints);
 
         player.shoot();
-        assertEquals(2, player.getTotalPoints());
+        assertEquals(2, player.totalPoints);
     }
 
     @Test
     public void shouldNotDoHaveAnyPointIfPlayerDoesNotHaveTheBall() {
         player.ballPossession = 0;
-        assertEquals(0, player.getTotalPoints());
+        assertEquals(0, player.totalPoints);
     }
 
     @Test
@@ -31,7 +31,7 @@ class PlayerTest {
         Player otherPlayer = new Player(0, 2, Player.NOT_IN_POSSESSION_OF_THE_BALL);
         player.pass(otherPlayer);
 
-        assertEquals(2, otherPlayer.getTotalPoints());
+        assertEquals(2, otherPlayer.totalPoints);
         assertTrue(player.ballPossession == Player.NOT_IN_POSSESSION_OF_THE_BALL);
         assertTrue(otherPlayer.ballPossession == Player.IN_POSSESSION_OF_THE_BALL);
     }
@@ -42,6 +42,6 @@ class PlayerTest {
         player.ballPossession = Player.NOT_IN_POSSESSION_OF_THE_BALL;
         player.pass(otherPlayer);
 
-        assertEquals(0, player.getTotalPoints());
+        assertEquals(0, player.totalPoints);
     }
 }
