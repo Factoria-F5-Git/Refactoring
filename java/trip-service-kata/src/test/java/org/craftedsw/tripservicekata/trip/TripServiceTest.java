@@ -4,13 +4,14 @@ import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.craftedsw.tripservicekata.user.User.UserBuilder.anUser;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TripServiceTest {
 
@@ -21,7 +22,7 @@ public class TripServiceTest {
     public void shouldThrowExceptionWhenUserIsNotLoggedIn() {
         loggedInUser = null;
         assertThrows(UserNotLoggedInException.class, () -> {
-            new TestableTripService().getTripsByUser(null);
+            new TestableTripService(createFakeTripService(loggedInUser, trips)).getTripsByUser(null);
         });
     }
 
@@ -29,7 +30,7 @@ public class TripServiceTest {
     void shouldReturnEmptryTripsListWhenUserIsLoggedInButIsNotFriends() {
         User laExDeEdu = new User();
         loggedInUser = new User(); //representa a Edu
-        List<Trip> tripsDeLaExDeEdu = new TestableTripService().getTripsByUser(laExDeEdu);
+        List<Trip> tripsDeLaExDeEdu = new TestableTripService(createFakeTripService(laExDeEdu, trips)).getTripsByUser(laExDeEdu);
 
         assertThat(tripsDeLaExDeEdu.size(), is(0));
     }
@@ -44,7 +45,7 @@ public class TripServiceTest {
                 .withFriends(List.of(loggedInUser))
                 .build();
 
-        List<Trip> tripsDeJavi = new TestableTripService().getTripsByUser(javi);
+        List<Trip> tripsDeJavi = new TestableTripService(createFakeTripService(javi, trips)).getTripsByUser(javi);
 
         assertThat(tripsDeJavi.size(), is(0));
     }
@@ -59,7 +60,7 @@ public class TripServiceTest {
                 .withCloseFriends(List.of(loggedInUser))
                 .build();
 
-        List<Trip> tripsDeJavi = new TestableTripService().getTripsByUser(javi);
+        List<Trip> tripsDeJavi = new TestableTripService(createFakeTripService(javi, trips)).getTripsByUser(javi);
 
         assertThat(tripsDeJavi.size(), is(2));
         assertThat(tripsDeJavi.get(0), is(tripToSanFran));
@@ -68,15 +69,27 @@ public class TripServiceTest {
 
     private static class TestableTripService extends TripService {
 
+        private TestableTripService(TripsFinder fakeTripService) {
+            super(fakeTripService);
+        }
+
         @Override
-        protected User getLoggedUser() {
+        public User getLoggedUser() {
             return loggedInUser;
         }
 
-        @Override
-        protected List<Trip> findTripsByUser(User user) {
-            return trips;
-        }
     }
 
+    private static TripsFinder createFakeTripService(User loggedInUser, List<Trip> trips) {
+        final TripsFinder tripFinder = mock(TripsFinder.class);
+        when(tripFinder.findTripsByUser(loggedInUser)).thenReturn(trips);
+        return tripFinder;
+    }
+
+    //ifs positivos
+    //declarar variables cerca de su primer uso
+    //terminaciones tempranas vs un solo return
+    //variables de un solo no hacen falta
+    //dependencies como delegados
+    //bloques de codigo complejo encapsulados en un metodo
 }
